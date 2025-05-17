@@ -6,18 +6,27 @@
 		<item key="org.eclipse.ui.internal.quickaccess.QuickAccessDialogDIALOG_USE_PERSISTED_SIZE" value="true"/>
 		<item key="org.eclipse.ui.internal.quickaccess.QuickAccessDialogDIALOG_USE_PERSISTED_LOCATION" value="false"/>
 		<list key="orderedElements">
+			<item value="org.eclipse.ui.window.preferences(preferencePageId=org.eclipse.cdt.ui.preferences.CodeTemplatePreferencePage)"/>
 			<item value="org.eclipse.ui.preferencePages.Views"/>
 		</list>
 		<list key="orderedProviders">
+			<item value="org.eclipse.ui.commands"/>
 			<item value="org.eclipse.ui.preferences"/>
 		</list>
 		<list key="textEntries">
 			<item value="1"/>
+			<item value="1"/>
 		</list>
 		<list key="textArray">
+			<item value="style"/>
 			<item value="theme"/>
 		</list>
 	</section>
 	<section name="WorkbenchPreferenceDialog">
+		<item key="DIALOG_X_ORIGIN" value="488"/>
+		<item key="DIALOG_Y_ORIGIN" value="93"/>
+		<item key="DIALOG_WIDTH" value="962"/>
+		<item key="DIALOG_HEIGHT" value="640"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
 	</section>
 </section>

@@ -123,6 +123,7 @@ extern "C" {
 /** @addtogroup Device_Included
   * @{
   */
+//#include "stm32f407xx.h"
 
 #if defined(STM32F405xx)
 #include "stm32f405xx.h"

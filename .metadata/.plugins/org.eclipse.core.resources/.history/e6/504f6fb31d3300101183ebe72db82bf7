@@ -1,0 +1,123 @@
+/*
+ * main.c
+ *
+ *  Created on: Feb 28, 2025
+ *      Author: Ali Rezaei
+ */
+
+#include "main.h"
+
+int main(void)
+{
+	// set max SYSCLK in 168 MHz
+	rcc_SYSCLK_Config();
+
+	// system clock
+	uint32_t sysclk = rcc_Get_SYSCLK_Frequency();
+	printf("SYSCLK = %lu MHz.\n", sysclk);
+
+	// SysTick timer configuration
+	rcc_SysTick_Config(1000 * sysclk);
+	printf("SysTick time = 1 us.\n");
+
+	// Configs
+    i2c_I2C1_Config();
+//    usart_USART3_Config(); // Fucking PB6, PB7
+//    tim_TIM3_Config();
+	tim_TIM3_3PWM_Config();
+	tim_TIM2_Config();
+
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIODEN;
+	GPIOD->MODER |= GPIO_MODER_MODE15_0;
+	GPIOD->MODER &= ~GPIO_MODER_MODE15_1;
+
+    // Open loop or closed loop
+    OLCL_e loop = OL;
+
+    // AS5600 sensor instance
+	Sensor_s sensor;
+
+    // BLDC motor and driver instance
+    BLDCMotor_s motor;
+    BLDCDriver_s driver;
+
+    // target position
+	float target = _PI;
+
+	// init sensor
+	sensor_Init(&sensor);
+
+	// link sensor
+	BLDCMotor_LinkSensor(&motor, &sensor);
+
+	// init driver
+	BLDCDriver_Init(&driver);
+//	driver.FOCDriver.voltage_power_supply = 24;
+//	driver.FOCDriver.voltage_limit = 24;
+
+
+	// link driver
+	BLDCMotor_LinkDriver(&motor, &driver);
+
+	// init motor
+	int pole_pairs = 14;        // number of pole pairs
+	float resistance = NOT_SET; // phase resistance
+	//    float resistance = 34.3f; // phase resistance
+	float kv = NOT_SET; // back emf constant
+	float inductance = NOT_SET; // phase inductance
+	//    float inductance = 6e-3f; // phase inductance
+	BLDCMotor_Init(&motor, pole_pairs, resistance, kv, inductance);
+	// set motor voltage and velocity limit
+//	motor.FOCMotor.voltage_limit = 24;
+//	motor.FOCMotor.velocity_limit = 1;
+
+	// init FOC for closed-loop
+	if (loop == CL)
+	{
+		// Velocity PID
+		float PID_velocity_P = 1.5f;
+		float PID_velocity_I = 2.5f;
+		float PID_velocity_D = 0.0f;
+		pid_SetGains(&(motor.FOCMotor.PID_velocity), PID_velocity_P,
+				PID_velocity_I, PID_velocity_D, DEF_PID_VEL_RAMP,
+				DEF_PID_VEL_LIM);
+
+		// Angle PID
+		float PID_angle_P = 40.0f;
+		float PID_angle_I = 0.5f;
+		float PID_angle_D = 0.0f;
+		pid_SetGains(&(motor.FOCMotor.P_angle), PID_angle_P, PID_angle_I, PID_angle_D,
+		DEF_PID_ANG_RAMP, DEF_PID_ANG_LIM);
+
+		// Velocity and Angle Low-Pass Filters Time Constant
+		lpf_SetTimeConstant(&(motor.FOCMotor.LPF_velocity), 0.005f);
+		lpf_SetTimeConstant(&(motor.FOCMotor.LPF_angle), 0.005f);
+
+		// init FOC if closed loop
+		BLDCMotor_InitFOC(&motor);
+	}
+
+
+	// clear shaft angle if open loop
+	if (loop == OL)
+	{
+		motor.FOCMotor.shaft_angle = 0.0;
+		motor.FOCMotor.electrical_angle = 0.0;
+	}
+
+	while(1)
+	{
+		if (loop == CL)
+		{
+			// loop FOC (closed loop)
+			BLDCMotor_LoopFOC(&motor);
+		}
+
+		// move to target
+		BLDCMotor_Move(&motor, target, loop);
+
+		// loop frequency
+		tim_TIM2_Delay_ms(1);
+	}
+}
+

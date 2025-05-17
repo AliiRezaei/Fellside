@@ -1,1 +1,5 @@
-"./Startup/startup_stm32f407vgtx.o"
+"./Core/Src/main.o"
+"./Core/Src/syscalls.o"
+"./Core/Src/sysmem.o"
+"./Core/Src/system_stm32f4xx.o"
+"./Startup/startup_stm32f407xx.o"
