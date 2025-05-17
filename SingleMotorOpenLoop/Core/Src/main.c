@@ -18,11 +18,22 @@ int main(void)
 	// timer 3 PWM configuration
 	tim_TIM3_3PWM_Config();
 
-	// test PWMs
-	TIM3->CCR1 = 1680 * 0.25;
-	TIM3->CCR2 = 1680 * 0.50;
-	TIM3->CCR3 = 1680 * 0.75;
+	// timer 2 Delay configuration
+	tim_TIM2_Delay_Config();
 
-	while(1) {;}
+	// enable blue led for debugging
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIODEN;
+	GPIOD->MODER |= GPIO_MODER_MODE15_0;
+	GPIOD->MODER &= ~GPIO_MODER_MODE15_1;
+
+
+	while(1)
+	{
+		// test delay
+		GPIOD->ODR |=  GPIO_ODR_OD15;
+		tim_TIM2_Delay_us(100);
+		GPIOD->ODR &= ~GPIO_ODR_OD15;
+		tim_TIM2_Delay_us(100);
+	}
 }
 
