@@ -31,9 +31,9 @@ int main(void)
 	{
 		// test delay
 		GPIOD->ODR |=  GPIO_ODR_OD15;
-		tim_TIM2_Delay_us(1000);
+		tim_TIM2_Delay_us(10);
 		GPIOD->ODR &= ~GPIO_ODR_OD15;
-		tim_TIM2_Delay_us(1000);
+		tim_TIM2_Delay_us(10);
 	}
 }
 

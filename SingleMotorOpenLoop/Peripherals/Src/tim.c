@@ -77,7 +77,7 @@ void tim_TIM3_3PWM_Config(void)
 /*
  * @brief : Timer 2 Configuration for Delay Generating
  * @note  :
- *          milli seconds and micro seconds are available
+ *          milliseconds and microseconds are available
  *          so, timer counting-up and overflow each 1ms
  */
 void tim_TIM2_Delay_Config(void)
@@ -85,8 +85,8 @@ void tim_TIM2_Delay_Config(void)
     RCC->APB1ENR |= RCC_APB1ENR_TIM2EN; // enable TIM2 clock
 
     // set auto reload and prescaler values
-    TIM2->ARR = 42 - 1; // because of APB1 clock is 42 MHz
-    TIM2->PSC = 1;
+    TIM2->ARR = 1000 - 1; // because of APB1 clock is 42 MHz
+    TIM2->PSC = 84 - 1;
 
     TIM2->DIER |= TIM_DIER_UIE; // enable update interrupt
     NVIC_EnableIRQ(TIM2_IRQn);
@@ -101,15 +101,14 @@ void TIM2_IRQHandler(void)
 {
     if(TIM2->SR & TIM_SR_UIF)
     {
-        _tim_usec_++; // increase milli seconds couner
-        if(_tim_usec_ % 1000 == 0) {_tim_msec_++;}
+        _tim_msec_++; // increase milliseconds couner
         TIM2->SR &= ~TIM_SR_UIF; // clear interrupt flag
     }
 }
 
 /*
- * @brief  : Get Milli Seconds Value at this Moment
- * @retval : milli seconds value
+ * @brief  : Get milliseconds Value at this Moment
+ * @retval : milliseconds value
  */
 uint32_t _tim_msec_val_(void)
 {
@@ -117,17 +116,17 @@ uint32_t _tim_msec_val_(void)
 }
 
 /*
- * @brief  : Get Micro Seconds Value at this Moment
- * @retval : micro seconds value
+ * @brief  : Get microseconds Value at this Moment
+ * @retval : microseconds value
  */
 uint32_t _tim_usec_val_(void)
 {
-    return _tim_usec_;
+    return _tim_msec_val_() * 1000 + TIM2->CNT;
 }
 
 /*
- * @brief : Timer2 Delay Milli Seconds
- * @param : milli seconds delay
+ * @brief : Timer2 Delay milliseconds
+ * @param : milliseconds delay
  */
 void tim_TIM2_Delay_ms(uint32_t ms)
 {
@@ -136,8 +135,8 @@ void tim_TIM2_Delay_ms(uint32_t ms)
 }
 
 /*
- * @brief : Timer2 Delay Micro Seconds
- * @param : micro seconds delay
+ * @brief : Timer2 Delay microseconds
+ * @param : microseconds delay
  */
 void tim_TIM2_Delay_us(uint32_t us)
 {

@@ -20,32 +20,32 @@ void tim_TIM3_3PWM_Config(void);
 /*
  * @brief : Timer 2 Configuration for Delay Generating
  * @note  :
- *          milli seconds and micro seconds are available
+ *          milliseconds and microseconds are available
  *          so, timer counting-up and overflow each 1ms
  */
 void tim_TIM2_Delay_Config(void);
 
 /*
- * @brief  : Get Milli Seconds Value at this Moment
- * @retval : milli seconds value
+ * @brief  : Get milliseconds Value at this Moment
+ * @retval : milliseconds value
  */
 uint32_t _tim_msec_val_(void);
 
 /*
- * @brief  : Get Micro Seconds Value at this Moment
- * @retval : micro seconds value
+ * @brief  : Get microseconds Value at this Moment
+ * @retval : microseconds value
  */
 uint32_t _tim_usec_val_(void);
 
 /*
- * @brief : Timer2 Delay Milli Seconds
- * @param : milli seconds delay
+ * @brief : Timer2 Delay milliseconds
+ * @param : milliseconds delay
  */
 void tim_TIM2_Delay_ms(uint32_t ms);
 
 /*
- * @brief : Timer2 Delay Micro Seconds
- * @param : micro seconds delay
+ * @brief : Timer2 Delay microseconds
+ * @param : microseconds delay
  */
 void tim_TIM2_Delay_us(uint32_t us);
 
