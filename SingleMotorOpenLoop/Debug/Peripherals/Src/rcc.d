@@ -1,4 +1,4 @@
-Core/Src/main.o: ../Core/Src/main.c \
+Peripherals/Src/rcc.o: ../Peripherals/Src/rcc.c \
  C:/Users/Asus/armcortex/Fellside/SingleMotorOpenLoop/Core/Inc/main.h \
  C:/Users/Asus/armcortex/Fellside/SingleMotorOpenLoop/Core/Inc/stm32f407xx.h \
  C:/Users/Asus/armcortex/Fellside/SingleMotorOpenLoop/CMSIS/Include/core_cm4.h \

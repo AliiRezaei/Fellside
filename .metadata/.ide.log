@@ -961,3 +961,4 @@
 2025-05-17 16:26:27,542 [INFO] WebApp:579 - Web application path used C:\ST\STM32CubeIDE_1.17.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.13.0.202411220809\db\plugins\mcufinder\reactClient1\index.html
 2025-05-17 16:26:27,642 [INFO] UserAuth:486 - Internet connection configuration mode: 1
 2025-05-17 16:26:27,819 [INFO] WebApp:187 - Connection restablished
+2025-05-17 16:54:51,992 [INFO] LogOutputStream:77 - [STDOUT_REDIRECT] StartTraceHandler.execute(), success : Collect=true

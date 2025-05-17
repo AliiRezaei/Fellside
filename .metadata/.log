@@ -230,3 +230,12 @@ org.eclipse.equinox.p2.core.ProvisionException: No repository found at https://s
 
 !ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2025-05-17 16:27:25.996
 !MESSAGE No repository found at https://download.eclipse.org/releases/2023-12.
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2025-05-17 16:54:20.521
+!MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 16000000; div: 8
+
+!ENTRY org.eclipse.cdt.core 1 0 2025-05-17 16:57:36.111
+!MESSAGE Indexed 'SingleMotorOpenLoop' (4 sources, 66 headers) in 0.444 sec: 3,430 declarations; 5,649 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.022%)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2025-05-17 17:05:04.222
+!MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 168000000; div: 84
