@@ -74,6 +74,9 @@ void rcc_SysTick_Config(void)
 			      |  SysTick_CTRL_TICKINT_Msk;  // enable interrupt
 }
 
+/*
+ * @brief : SysTick Timer Interrupt Request Handler
+ */
 void SysTick_Handler(void)
 {
 	// clear pending
