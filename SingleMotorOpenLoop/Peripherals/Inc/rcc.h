@@ -10,7 +10,7 @@
 
 /*
  * @brief : System Clock Configuration
- * @Note  :
+ * @note  :
  *          SYSCLK 168 MHz
  * 		    HCLK   168 MHz
  * 		    APB1    42 MHz
@@ -20,7 +20,7 @@ void rcc_SysClock_Config(void);
 
 /*
  * @brief : SysTick Timer Configuration
- * @Note  : adjusted in 1ms regarding 168 MHz system clock
+ * @note  : adjusted in 1ms regarding 168 MHz system clock
  */
 void rcc_SysTick_Config(void);
 

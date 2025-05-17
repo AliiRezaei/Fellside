@@ -15,10 +15,13 @@ int main(void)
 	// systick timer configuration
 	rcc_SysTick_Config();
 
-	// test systick timer
-	RCC->AHB1ENR |= RCC_AHB1ENR_GPIODEN;
-	GPIOD->MODER |= GPIO_MODER_MODE15_0;
-	GPIOD->MODER &= ~GPIO_MODER_MODE15_1;
+	// timer 3 PWM configuration
+	tim_TIM3_3PWM_Config();
+
+	// test PWMs
+	TIM3->CCR1 = 1680 * 0.25;
+	TIM3->CCR2 = 1680 * 0.50;
+	TIM3->CCR3 = 1680 * 0.75;
 
 	while(1) {;}
 }

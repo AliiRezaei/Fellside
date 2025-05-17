@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include "rcc.h"
+#include "tim.h"
 
 
 #endif /* INC_MAIN_H_ */
