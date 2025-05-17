@@ -9,6 +9,9 @@
 
 int main(void)
 {
+	// system clock configuration
+	rcc_SysClock_Config();
+
 	while(1) {;}
 }
 
