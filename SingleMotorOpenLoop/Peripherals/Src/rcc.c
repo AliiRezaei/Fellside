@@ -49,3 +49,33 @@ void rcc_SysClock_Config(void)
 	RCC->CFGR |= RCC_CFGR_SW_PLL;
 	while (!(RCC->CFGR & RCC_CFGR_SWS)) {;}  // wait for it
 }
+
+/*
+ * @brief : SysTick Timer Configuration
+ * @Note  : adjusted in 1ms regarding 168 MHz system clock
+ */
+void rcc_SysTick_Config(void)
+{
+	// clear control register to disable SysTick at beginning
+	SysTick->CTRL = 0;
+
+	// set reload value regarding SYSCLK value (168 MHz)
+	SysTick->LOAD = 168000 - 1;
+
+	// priority SysTick interrupt
+	NVIC_SetPriority(SysTick_IRQn, 0);
+
+	// reset SysTick value to zero
+	SysTick->VAL = 0;
+
+	// enable SysTick from CTRL
+	SysTick->CTRL |= SysTick_CTRL_ENABLE_Msk    // enable SysTick counter
+	              |  SysTick_CTRL_CLKSOURCE_Msk // CPU clock as SysTick source
+			      |  SysTick_CTRL_TICKINT_Msk;  // enable interrupt
+}
+
+void SysTick_Handler(void)
+{
+	// clear pending
+	NVIC_ClearPendingIRQ(SysTick_IRQn);
+}

@@ -18,4 +18,10 @@
  */
 void rcc_SysClock_Config(void);
 
+/*
+ * @brief : SysTick Timer Configuration
+ * @Note  : adjusted in 1ms regarding 168 MHz system clock
+ */
+void rcc_SysTick_Config(void);
+
 #endif /* INC_RCC_H_ */
