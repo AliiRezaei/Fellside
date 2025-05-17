@@ -7,6 +7,10 @@
 
 #include "main.h"
 
+// global ms counter
+static __IO uint32_t _tim_msec_ = 0;
+static __IO uint32_t _tim_usec_ = 0;
+
 /*
  * @brief : Timer3 Configuration for Generating 3 PWMs in PA7, PA6, PB0
  * @note  :
@@ -68,4 +72,75 @@ void tim_TIM3_3PWM_Config(void)
 
 	// start timer
 	TIM3->CR1 |= TIM_CR1_CEN;
+}
+
+/*
+ * @brief : Timer 2 Configuration for Delay Generating
+ * @note  :
+ *          milli seconds and micro seconds are available
+ *          so, timer counting-up and overflow each 1ms
+ */
+void tim_TIM2_Delay_Config(void)
+{
+    RCC->APB1ENR |= RCC_APB1ENR_TIM2EN; // enable TIM2 clock
+
+    // set auto reload and prescaler values
+    TIM2->ARR = 42 - 1; // because of APB1 clock is 42 MHz
+    TIM2->PSC = 1;
+
+    TIM2->DIER |= TIM_DIER_UIE; // enable update interrupt
+    NVIC_EnableIRQ(TIM2_IRQn);
+
+    TIM2->CR1 |= TIM_CR1_CEN;   // start timer
+}
+
+/*
+ * @brief : Timer 2 Interrupt Request Handler
+ */
+void TIM2_IRQHandler(void)
+{
+    if(TIM2->SR & TIM_SR_UIF)
+    {
+        _tim_usec_++; // increase milli seconds couner
+        if(_tim_usec_ % 1000 == 0) {_tim_msec_++;}
+        TIM2->SR &= ~TIM_SR_UIF; // clear interrupt flag
+    }
+}
+
+/*
+ * @brief  : Get Milli Seconds Value at this Moment
+ * @retval : milli seconds value
+ */
+uint32_t _tim_msec_val_(void)
+{
+    return _tim_msec_;
+}
+
+/*
+ * @brief  : Get Micro Seconds Value at this Moment
+ * @retval : micro seconds value
+ */
+uint32_t _tim_usec_val_(void)
+{
+    return _tim_usec_;
+}
+
+/*
+ * @brief : Timer2 Delay Milli Seconds
+ * @param : milli seconds delay
+ */
+void tim_TIM2_Delay_ms(uint32_t ms)
+{
+    uint32_t start = _tim_msec_val_();
+    while (_tim_msec_val_() - start < ms);
+}
+
+/*
+ * @brief : Timer2 Delay Micro Seconds
+ * @param : micro seconds delay
+ */
+void tim_TIM2_Delay_us(uint32_t us)
+{
+    uint32_t start = _tim_usec_val_();
+    while (_tim_usec_val_() - start < us);
 }
