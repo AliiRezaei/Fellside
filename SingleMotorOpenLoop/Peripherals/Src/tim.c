@@ -101,7 +101,7 @@ void TIM2_IRQHandler(void)
 {
     if(TIM2->SR & TIM_SR_UIF)
     {
-        _tim_msec_++; // increase milliseconds couner
+        _tim_msec_++; // increase milliseconds counter
         TIM2->SR &= ~TIM_SR_UIF; // clear interrupt flag
     }
 }
