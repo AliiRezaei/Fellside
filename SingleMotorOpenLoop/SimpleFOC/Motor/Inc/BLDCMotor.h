@@ -68,6 +68,9 @@ typedef struct
 
 	// open loop time stamp
 	long open_loop_timestamp;
+
+	// movement direction
+	float direction;
 } BLDCMotor_s;
 
 /*
