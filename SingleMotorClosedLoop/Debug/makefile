@@ -33,34 +33,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := SingleMotorOpenLoop
+BUILD_ARTIFACT_NAME := SingleMotorClosedLoop
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-SingleMotorOpenLoop.elf \
+SingleMotorClosedLoop.elf \
 
 MAP_FILES += \
-SingleMotorOpenLoop.map \
+SingleMotorClosedLoop.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-SingleMotorOpenLoop.list \
+SingleMotorClosedLoop.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: SingleMotorOpenLoop.elf secondary-outputs
+main-build: SingleMotorClosedLoop.elf secondary-outputs
 
 # Tool invocations
-SingleMotorOpenLoop.elf SingleMotorOpenLoop.map: $(OBJS) $(USER_OBJS) C:\Users\Asus\armcortex\Fellside\SingleMotorOpenLoop\STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "SingleMotorOpenLoop.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Asus\armcortex\Fellside\SingleMotorOpenLoop\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SingleMotorOpenLoop.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+SingleMotorClosedLoop.elf SingleMotorClosedLoop.map: $(OBJS) $(USER_OBJS) C:\Users\Asus\armcortex\Fellside\SingleMotorClosedLoop\STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "SingleMotorClosedLoop.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Asus\armcortex\Fellside\SingleMotorClosedLoop\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SingleMotorClosedLoop.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -69,14 +69,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-SingleMotorOpenLoop.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "SingleMotorOpenLoop.list"
+SingleMotorClosedLoop.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "SingleMotorClosedLoop.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) SingleMotorOpenLoop.elf SingleMotorOpenLoop.list SingleMotorOpenLoop.map default.size.stdout
+	-$(RM) SingleMotorClosedLoop.elf SingleMotorClosedLoop.list SingleMotorClosedLoop.map default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
