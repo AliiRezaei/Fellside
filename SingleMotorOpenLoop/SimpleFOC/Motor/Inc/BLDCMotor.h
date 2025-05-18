@@ -46,6 +46,9 @@ typedef struct
 
 	// pwm modulation related variables
 	uint8_t modulation_centered; // flag (1) centered modulation around driver limit /2  or  (0) pulled to 0
+
+	// driver instance
+	BLDCDriver_s *BLDCDriver;
 } BLDCMotor_s;
 
 /*
@@ -74,6 +77,14 @@ void BLDCMotor_Move(BLDCMotor_s *BLDCMotor, float target);
  * 			target    --> target angle in radians
  */
 void BLDCMotor_RunOpenloop(BLDCMotor_s *BLDCMotor, float target);
+
+/*
+ * @brief : BLDC Motor and Driver Linker
+ * @param :
+ * 			BLDCMotor  --> pointer to BLDCMotor_s  structure, handle motor  params
+ * 			BLDCDriver --> pointer to BLDCDriver_s structure, handle driver params
+ */
+void BLDCMotor_LinkDriver(BLDCMotor_s *BLDCMotor, BLDCDriver_s *Driver);
 
 
 #endif /* MOTOR_INC_BLDCMOTOR_H_ */

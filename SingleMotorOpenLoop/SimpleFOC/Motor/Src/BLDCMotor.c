@@ -151,3 +151,15 @@ void BLDCMotor_RunOpenloop(BLDCMotor_s *BLDCMotor, float target)
 	// save time stamp for next call
 	BLDCMotor->open_loop_timestamp = now_us;
 }
+
+/*
+ * @brief : BLDC Motor and Driver Linker
+ * @param :
+ * 			BLDCMotor  --> pointer to BLDCMotor_s  structure, handle motor  params
+ * 			BLDCDriver --> pointer to BLDCDriver_s structure, handle driver params
+ */
+void BLDCMotor_LinkDriver(BLDCMotor_s *BLDCMotor, BLDCDriver_s *BLDCDriver)
+{
+	// link driver
+	BLDCMotor->BLDCDriver = BLDCDriver;
+}
