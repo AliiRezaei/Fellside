@@ -13,6 +13,7 @@
 #define DEF_MOT_VOLT_LIM (DEF_POWER_SUPPLY) // default motor voltage limit
 #define DEF_DRV_VOLT_LIM (DEF_POWER_SUPPLY) // default driver voltage limit
 #define DEF_MOT_CURR_LIM 2                  // default current limit
+#define DEF_MOT_VEL_LIM  5                  // default velocity limit
 
 // utility defines
 #define _2_SQRT3 1.15470053838f
