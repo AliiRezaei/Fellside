@@ -39,7 +39,7 @@ int main(void)
 	BLDCMotor_Init(&motor, pole_pairs, resistance, inductance, kv);
 
 	// target to go
-	float target = _PI;
+	float target = - _PI;
 
 	while(1)
 	{

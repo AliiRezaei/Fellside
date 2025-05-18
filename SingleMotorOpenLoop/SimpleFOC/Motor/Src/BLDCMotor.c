@@ -161,7 +161,10 @@ void BLDCMotor_RunOpenloop(BLDCMotor_s *BLDCMotor, float target)
 void BLDCMotor_Move(BLDCMotor_s *BLDCMotor, float target)
 {
 	// set internal target variable
-	BLDCMotor->target = target;
+	BLDCMotor->target = fabs(target);
+
+	// movement direction
+	BLDCMotor->direction = _sign(target);
 
 	// calculate the back-emf voltage if KV_rating available U_bemf = vel*(1/KV)
 	if (_isset(BLDCMotor->KV_rating))
@@ -223,6 +226,15 @@ void BLDCMotor_SetPhaseVoltage(BLDCMotor_s *BLDCMotor, float Uq, float Ud, float
 		BLDCMotor->Ub += center;
 		BLDCMotor->Uc += center;
 	}
+
+	// swap PWM pins regarding movement direction
+	if (BLDCMotor->direction < 0)
+	{
+		float temp = BLDCMotor->Ub;
+		BLDCMotor->Ub = BLDCMotor->Uc;
+		BLDCMotor->Uc = temp;
+	}
+
 	// set the voltages in driver
 	BLDCDriver_SetPWM(BLDCMotor->BLDCDriver, BLDCMotor->Ua, BLDCMotor->Ub, BLDCMotor->Uc);
 }

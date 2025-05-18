@@ -6,4 +6,4 @@ C:/Users/Asus/armcortex/Fellside/SingleMotorOpenLoop/SimpleFOC/Utils/utils.h:79:
 ../SimpleFOC/Motor/Src/BLDCMotor.c:92:6:BLDCMotor_LinkDriver	16	static
 ../SimpleFOC/Motor/Src/BLDCMotor.c:104:6:BLDCMotor_RunOpenloop	48	static
 ../SimpleFOC/Motor/Src/BLDCMotor.c:161:6:BLDCMotor_Move	16	static
-../SimpleFOC/Motor/Src/BLDCMotor.c:190:6:BLDCMotor_SetPhaseVoltage	64	static
+../SimpleFOC/Motor/Src/BLDCMotor.c:193:6:BLDCMotor_SetPhaseVoltage	64	static
