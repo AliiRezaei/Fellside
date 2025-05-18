@@ -18,6 +18,15 @@ typedef struct
 } DQVoltage_s;
 
 /*
+ * @brief : DQ Current Structure
+*/
+typedef struct
+{
+    float d;
+    float q;
+} DQCurrent_s;
+
+/*
  * @brief : BLDC Motor Structure
  */
 typedef struct
@@ -31,6 +40,7 @@ typedef struct
 	float shaft_velocity_sp;     // current target velocity
 	float shaft_angle_sp;        // current target angle
 	DQVoltage_s voltage;         // current d and q voltage set to the motor
+	DQCurrent_s current;         // current d and q current measured
 	float voltage_bemf;          // estimated backemf voltage (if provided KV constant)
 
 	// motor physical parameters
@@ -44,11 +54,20 @@ typedef struct
 	float current_limit;         // current limiting variable
 	float velocity_limit;        // velocity limiting variable
 
+	// phase voltages
+	float Ua, Ub, Uc;
+
+	// Phase voltages U alpha and U beta used for inverse Park and Clarke transform
+	float Ualpha, Ubeta;
+
 	// pwm modulation related variables
 	uint8_t modulation_centered; // flag (1) centered modulation around driver limit /2  or  (0) pulled to 0
 
 	// driver instance
 	BLDCDriver_s *BLDCDriver;
+
+	// open loop time stamp
+	long open_loop_timestamp;
 } BLDCMotor_s;
 
 /*
@@ -63,12 +82,12 @@ typedef struct
 void BLDCMotor_Init(BLDCMotor_s *BLDCMotor, int _PP,  float _R, float _KV, float _L);
 
 /*
- * @brief : BLDC Motor Move to Target
+ * @brief : BLDC Motor and Driver Linker
  * @param :
- * 			BLDCMotor --> pointer to BLDCMotor_s structure, handle motor params
- * 			target    --> target angle in radians
+ * 			BLDCMotor  --> pointer to BLDCMotor_s  structure, handle motor  params
+ * 			BLDCDriver --> pointer to BLDCDriver_s structure, handle driver params
  */
-void BLDCMotor_Move(BLDCMotor_s *BLDCMotor, float target);
+void BLDCMotor_LinkDriver(BLDCMotor_s *BLDCMotor, BLDCDriver_s *Driver);
 
 /*
  * @brief : BLDC Motor Run OpenLoop, Caller is BLDCMotor_Move
@@ -79,12 +98,21 @@ void BLDCMotor_Move(BLDCMotor_s *BLDCMotor, float target);
 void BLDCMotor_RunOpenloop(BLDCMotor_s *BLDCMotor, float target);
 
 /*
- * @brief : BLDC Motor and Driver Linker
+ * @brief : BLDC Motor Move to Target
+ * @param :
+ * 			BLDCMotor --> pointer to BLDCMotor_s structure, handle motor params
+ * 			target    --> target angle in radians
+ */
+void BLDCMotor_Move(BLDCMotor_s *BLDCMotor, float target);
+
+/*
+ * @brief : BLDC Motor Set Phase Voltage, leverages Park and Clarke (inv)transforms
+ *          to calculate and set the phase voltages
  * @param :
  * 			BLDCMotor  --> pointer to BLDCMotor_s  structure, handle motor  params
- * 			BLDCDriver --> pointer to BLDCDriver_s structure, handle driver params
+ * 			Uq, Ud     --> Park and Clarke voltages
+ * 			elec_angle --> electrical angle
  */
-void BLDCMotor_LinkDriver(BLDCMotor_s *BLDCMotor, BLDCDriver_s *Driver);
-
+void BLDCMotor_SetPhaseVoltage(BLDCMotor_s *BLDCMotor, float Uq, float Ud, float elec_angle);
 
 #endif /* MOTOR_INC_BLDCMOTOR_H_ */
