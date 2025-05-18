@@ -11,6 +11,67 @@
  * @brief : BLDC Motor Move to Target
  * @param :
  * 			BLDCMotor --> pointer to BLDCMotor_s structure, handle motor params
+ * 			_PP       --> pole pairs
+ * 			_R        --> phase resistance (Not Set by default)
+ * 			_L        --> phase inductance (Not Set by default)
+ * 			_KV       --> kv rating        (Not Set by default)
+ */
+void BLDCMotor_Init(BLDCMotor_s *BLDCMotor, int _PP,  float _R, float _KV, float _L)
+{
+	// assume modulation centered
+	BLDCMotor->feed_forward_velocity = 0.0f;
+	BLDCMotor->modulation_centered = 1;
+
+	// maximum velocity to be set to the motor
+	BLDCMotor->velocity_limit = DEF_MOT_VEL_LIM;
+
+	// maximum voltage to be set to the motor
+	BLDCMotor->voltage_limit  = DEF_MOT_VOLT_LIM;
+
+	// maximum current to be set to the motor
+	BLDCMotor->current_limit  = DEF_MOT_CURR_LIM;
+
+	// default target value
+	BLDCMotor->target    = 0;
+	BLDCMotor->voltage.d = 0;
+	BLDCMotor->voltage.q = 0;
+
+	// voltage back emf
+	BLDCMotor->voltage_bemf = 0;
+
+	// save pole pairs number
+	BLDCMotor->pole_pairs = _pp;
+
+	// save phase resistance number
+	BLDCMotor->phase_resistance = NOT_SET;
+	if (_isset(_R))
+		BLDCMotor->phase_resistance = _R;
+
+	// save back emf constant KV = 1/KV
+	// 1/sqrt(2) - rms value
+	BLDCMotor->KV_rating = NOT_SET;
+	if (_isset(_KV))
+		BLDCMotor->KV_rating = _KV;
+
+	// save phase inductance
+	BLDCMotor->phase_inductance = NOT_SET;
+	if (_isset(_L))
+		BLDCMotor->phase_inductance = _L;
+
+	// sanity check for the voltage limit configuration
+	if (BLDCMotor->voltage_limit
+			> BLDCMotor->Driver->FOCDriver.voltage_limit)
+		BLDCMotor->voltage_limit =
+				BLDCMotor->Driver->FOCDriver.voltage_limit;
+
+	// set zero to PWM
+	BLDCDriver_SetPWM(BLDCMotor->Driver, 0.0f, 0.0f, 0.0f);
+}
+
+/*
+ * @brief : BLDC Motor Move to Target
+ * @param :
+ * 			BLDCMotor --> pointer to BLDCMotor_s structure, handle motor params
  * 			target    --> target angle in radians
  */
 void BLDCMotor_Move(BLDCMotor_s *BLDCMotor, float target)
