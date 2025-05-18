@@ -1,1 +1,12 @@
-../Peripherals/Src/tim.c:17:6:tim_TIM3_3PWM_Config	4	static
+C:/Users/Asus/armcortex/Fellside/SingleMotorOpenLoop/CMSIS/Include/core_cm4.h:1684:22:__NVIC_EnableIRQ	16	static,ignoring_inline_asm
+C:/Users/Asus/armcortex/Fellside/SingleMotorOpenLoop/SimpleFOC/Utils/utils.h:44:29:_sin	32	static
+C:/Users/Asus/armcortex/Fellside/SingleMotorOpenLoop/SimpleFOC/Utils/utils.h:68:29:_cos	24	static
+C:/Users/Asus/armcortex/Fellside/SingleMotorOpenLoop/SimpleFOC/Utils/utils.h:74:28:_sincos	24	static
+C:/Users/Asus/armcortex/Fellside/SingleMotorOpenLoop/SimpleFOC/Utils/utils.h:79:29:_sqrtApprox	24	static
+../Peripherals/Src/tim.c:21:6:tim_TIM3_3PWM_Config	4	static
+../Peripherals/Src/tim.c:83:6:tim_TIM2_Delay_Config	8	static
+../Peripherals/Src/tim.c:100:6:TIM2_IRQHandler	4	static
+../Peripherals/Src/tim.c:113:10:_tim_msec_val_	4	static
+../Peripherals/Src/tim.c:122:10:_tim_usec_val_	8	static
+../Peripherals/Src/tim.c:131:6:tim_TIM2_Delay_ms	24	static
+../Peripherals/Src/tim.c:141:6:tim_TIM2_Delay_us	24	static

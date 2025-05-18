@@ -21,19 +21,30 @@ int main(void)
 	// timer 2 Delay configuration
 	tim_TIM2_Delay_Config();
 
-	// enable blue led for debugging
-	RCC->AHB1ENR |= RCC_AHB1ENR_GPIODEN;
-	GPIOD->MODER |= GPIO_MODER_MODE15_0;
-	GPIOD->MODER &= ~GPIO_MODER_MODE15_1;
-	GPIOD->OSPEEDR |= GPIO_OSPEEDER_OSPEEDR15;
+	// BLDC motor and driver instance
+	BLDCMotor_s motor;
+	BLDCDriver_s driver;
+
+	// init driver
+	BLDCDriver_Init(&driver);
+
+	// link motor and driver
+	BLDCMotor_LinkDriver(&motor, &driver);
+
+	// init motor
+	int pole_pairs = 14;        // number of pole pairs
+	float resistance = NOT_SET; // phase resistance
+	float kv = NOT_SET; // back emf constant
+	float inductance = NOT_SET; // phase inductance
+	BLDCMotor_Init(&motor, pole_pairs, resistance, inductance, kv);
+
+	// target to go
+	float target = _PI;
 
 	while(1)
 	{
-		// test delay
-		GPIOD->ODR |=  GPIO_ODR_OD15;
-		tim_TIM2_Delay_us(10);
-		GPIOD->ODR &= ~GPIO_ODR_OD15;
-		tim_TIM2_Delay_us(10);
+		// run open loop
+		BLDCMotor_Move(&motor, target);
 	}
 }
 

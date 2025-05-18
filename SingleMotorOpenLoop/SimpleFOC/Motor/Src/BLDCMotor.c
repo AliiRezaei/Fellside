@@ -33,6 +33,8 @@ void BLDCMotor_Init(BLDCMotor_s *BLDCMotor, int _PP,  float _R, float _KV, float
 
 	// default target value
 	BLDCMotor->target    = 0;
+	BLDCMotor->current.d = 0;
+	BLDCMotor->current.q = 0;
 	BLDCMotor->voltage.d = 0;
 	BLDCMotor->voltage.q = 0;
 

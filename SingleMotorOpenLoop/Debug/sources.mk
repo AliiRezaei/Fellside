@@ -24,5 +24,7 @@ C_DEPS :=
 SUBDIRS := \
 Core/Src \
 Peripherals/Src \
+SimpleFOC/Driver/Src \
+SimpleFOC/Motor/Src \
 Startup \
 

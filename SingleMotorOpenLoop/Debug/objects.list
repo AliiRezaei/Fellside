@@ -4,4 +4,6 @@
 "./Core/Src/system_stm32f4xx.o"
 "./Peripherals/Src/rcc.o"
 "./Peripherals/Src/tim.o"
+"./SimpleFOC/Driver/Src/BLDCDriver.o"
+"./SimpleFOC/Motor/Src/BLDCMotor.o"
 "./Startup/startup_stm32f407xx.o"

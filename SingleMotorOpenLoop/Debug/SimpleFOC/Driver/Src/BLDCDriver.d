@@ -1,4 +1,4 @@
-Peripherals/Src/tim.o: ../Peripherals/Src/tim.c \
+SimpleFOC/Driver/Src/BLDCDriver.o: ../SimpleFOC/Driver/Src/BLDCDriver.c \
  C:/Users/Asus/armcortex/Fellside/SingleMotorOpenLoop/Core/Inc/main.h \
  C:/Users/Asus/armcortex/Fellside/SingleMotorOpenLoop/Core/Inc/stm32f407xx.h \
  C:/Users/Asus/armcortex/Fellside/SingleMotorOpenLoop/CMSIS/Include/core_cm4.h \
