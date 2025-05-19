@@ -34,17 +34,32 @@ int main(void)
 	// init motor
 	int pole_pairs = 14;        // number of pole pairs
 	float resistance = NOT_SET; // phase resistance
-	float kv = NOT_SET; // back emf constant
+	float kv = NOT_SET;         // back emf constant
 	float inductance = NOT_SET; // phase inductance
 	BLDCMotor_Init(&motor, pole_pairs, resistance, inductance, kv);
 
 	// target to go
-	float target = - _PI;
-
+	float target = 0.0;
+	float target_arr[] = {1.0, 2.0, 3.0, 4.0};
+	int i = 0;
+	uint32_t start = _tim_msec_val_();
 	while(1)
 	{
-		// run open loop
-		BLDCMotor_Move(&motor, target);
+		target = target_arr[i++];
+		while (_tim_msec_val_() - start < 1500)
+		{
+			// run open loop
+			BLDCMotor_Move(&motor, target);
+		}
+		if (i > 3)
+			i = 0;
+		start = _tim_msec_val_();
 	}
+//	// target to go
+//	float target = -1.0;
+//	while (1)
+//	{
+//		BLDCMotor_Move(&motor, target);
+//	}
 }
 
