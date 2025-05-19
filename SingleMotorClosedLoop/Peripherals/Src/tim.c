@@ -70,6 +70,11 @@ void tim_TIM3_3PWM_Config(void)
 	// force update to load registers
 	TIM3->EGR |= TIM_EGR_UG;
 
+	// zero percent duty cycle at beginning
+	TIM3->CCR1 = 0;
+	TIM3->CCR2 = 0;
+	TIM3->CCR3 = 0;
+
 	// start timer
 	TIM3->CR1 |= TIM_CR1_CEN;
 }
