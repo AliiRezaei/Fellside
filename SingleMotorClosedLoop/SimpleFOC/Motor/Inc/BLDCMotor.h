@@ -36,6 +36,7 @@ typedef struct
 	float feed_forward_velocity; // feed forward velocity
 	float shaft_angle;           // motor angle
 	float electrical_angle;      // electrical angle
+	float zero_electric_angle;   // absolute zero electric angle
 	float shaft_velocity;        // motor velocity
 	float shaft_velocity_sp;     // target velocity
 	float shaft_angle_sp;        // target angle
@@ -49,6 +50,10 @@ typedef struct
 	int   pole_pairs;            // motor pole pairs number
 	float KV_rating;             // motor KV rating
 	float phase_inductance;      // motor phase inductance
+
+	// motor configuration parameters
+	float voltage_sensor_align;  // sensor and motor align voltage parameter
+	float velocity_index_search; // target velocity for index search
 
 	// limiting variables
 	float voltage_limit;         // voltage limiting variable
@@ -78,10 +83,10 @@ typedef struct
 	PIDController_s PID_current_d; // parameter determining the d current PID config
 	LowPassFilter_s LPF_current_q; //  parameter determining the current Low pass filter configuration
 	LowPassFilter_s LPF_current_d; //  parameter determining the current Low pass filter configuration
-	PIDController_s PID_velocity; // parameter determining the velocity PID configuration
-	PIDController_s P_angle; // parameter determining the position PID configuration
-	LowPassFilter_s LPF_velocity; //  parameter determining the velocity Low pass filter configuration
-	LowPassFilter_s LPF_angle;//  parameter determining the angle low pass filter configuration
+	PIDController_s PID_velocity;  // parameter determining the velocity PID configuration
+	PIDController_s PID_angle;     // parameter determining the position PID configuration
+	LowPassFilter_s LPF_velocity;  //  parameter determining the velocity Low pass filter configuration
+	LowPassFilter_s LPF_angle;     // parameter determining the angle low pass filter configuration
 } BLDCMotor_s;
 
 /*

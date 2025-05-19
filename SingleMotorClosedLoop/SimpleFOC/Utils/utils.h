@@ -20,14 +20,31 @@
 #define DEF_PID_VEL_I 10.0f                 // default PID controller I value
 #define DEF_PID_VEL_D 0.0f                  // default PID controller D value
 #define DEF_PID_VEL_RAMP 1000.0f            // default PID controller voltage ramp value
-#define DEF_PID_VEL_LIM (DEF_POWER_SUPPLY)  // default PID controller voltage limit
+#define DEF_PID_VEL_LIM (DEF_POWER_SUPPLY)  // default PID controller output limit
 
 // angle PID controller params
 #define DEF_PID_ANG_P 20.0f                 // default angle PID controller P value
 #define DEF_PID_ANG_I 0.0f                  // default angle PID controller I value
 #define DEF_PID_ANG_D 0.0f                  // default angle PID controller D value
-#define DEF_PID_ANG_RAMP 0.0f               // default angle PID controller voltage ramp value
+#define DEF_PID_ANG_RAMP 0.0f               // default angle PID controller output ramp value
 #define DEF_PID_ANG_LIM 20.0f               // angle velocity limit default
+
+// current PID controller params
+#define DEF_PID_CURR_P 3                    // default PID controller P value
+#define DEF_PID_CURR_I 300.0f               // default PID controller I value
+#define DEF_PID_CURR_D 0.0f                 // default PID controller D value
+#define DEF_PID_CURR_RAMP 0                 // default PID controller voltage ramp value
+#define DEF_PID_CURR_LIM (DEF_POWER_SUPPLY) // default PID controller output limit
+
+// index search
+#define DEF_INDEX_SEARCH_TARGET_VELOCITY 1.0f // default index search velocity
+// align voltage
+#define DEF_VOLTAGE_SENSOR_ALIGN 3.0f // default voltage for sensor and motor zero alignemt
+
+// low pass filters time constant
+#define DEF_VEL_FILTER_Tf 0.005f  // default velocity filter time constant
+#define DEF_ANG_FILTER_Tf 0.005f  // default angle filter time constant
+#define DEF_CURR_FILTER_Tf 0.005f // default currentt filter time constant
 
 // utility defines
 #define _2_SQRT3 1.15470053838f

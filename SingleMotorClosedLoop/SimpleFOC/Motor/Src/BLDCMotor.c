@@ -50,6 +50,9 @@ void BLDCMotor_Init(BLDCMotor_s *BLDCMotor, int _PP,  float _R, float _KV, float
 	BLDCMotor->Ualpha = 0.0;
 	BLDCMotor->Ubeta  = 0.0;
 
+	// initial zero electric angle
+	BLDCMotor->zero_electric_angle = 0.0;
+
 	// save pole pairs number
 	BLDCMotor->pole_pairs = _PP;
 
@@ -70,14 +73,57 @@ void BLDCMotor_Init(BLDCMotor_s *BLDCMotor, int _PP,  float _R, float _KV, float
 		BLDCMotor->phase_inductance = _L;
 
 	// sanity check for the voltage limit configuration
-	if (BLDCMotor->voltage_limit
-			> BLDCMotor->BLDCDriver->voltage_limit)
-		BLDCMotor->voltage_limit =
-				BLDCMotor->BLDCDriver->voltage_limit;
+	if (BLDCMotor->voltage_limit > BLDCMotor->BLDCDriver->voltage_limit)
+		BLDCMotor->voltage_limit = BLDCMotor->BLDCDriver->voltage_limit;
 
-	// initial angles
-	BLDCMotor->shaft_angle      = 0.0;
-	BLDCMotor->electrical_angle = 0.0;
+	// init current_q pid controller
+	pid_Init(&(BLDCMotor->PID_current_q));
+	pid_SetGains(&(BLDCMotor->PID_current_q), DEF_PID_CURR_P, DEF_PID_CURR_I,
+			DEF_PID_CURR_D, DEF_PID_CURR_RAMP, DEF_POWER_SUPPLY);
+
+	// init current_d pid controller
+	pid_Init(&(BLDCMotor->PID_current_d));
+	pid_SetGains(&(BLDCMotor->PID_current_d), DEF_PID_CURR_P, DEF_PID_CURR_I,
+			DEF_PID_CURR_D, DEF_PID_CURR_RAMP, DEF_POWER_SUPPLY);
+
+	// init velocity pid controller
+	pid_Init(&(BLDCMotor->PID_velocity));
+	pid_SetGains(&(BLDCMotor->PID_velocity), DEF_PID_VEL_P, DEF_PID_VEL_I,
+	DEF_PID_VEL_D, DEF_PID_VEL_RAMP, DEF_PID_VEL_LIM);
+
+	// init angle pid controller
+	pid_Init(&(BLDCMotor->P_angle));
+	pid_SetGains(&(BLDCMotor->P_angle), DEF_PID_ANG_P, DEF_PID_ANG_I,
+			DEF_PID_ANG_D,
+			DEF_PID_ANG_RAMP, DEF_PID_ANG_LIM);
+
+	// init low-pass filter current_q
+	lpf_Init(&(BLDCMotor->LPF_current_q));
+	lpf_SetTimeConstant(&(BLDCMotor->LPF_current_q), DEF_CURR_FILTER_Tf);
+
+	// init low-pass filter current_d
+	lpf_Init(&(BLDCMotor->LPF_current_d));
+	lpf_SetTimeConstant(&(BLDCMotor->LPF_current_d), DEF_CURR_FILTER_Tf);
+
+	// init low-pass filter velocity
+	lpf_Init(&(BLDCMotor->LPF_velocity));
+	lpf_SetTimeConstant(&(BLDCMotor->LPF_velocity), DEF_VEL_FILTER_Tf);
+
+	// init low-pass filter angle
+	lpf_Init(&(BLDCMotor->LPF_angle));
+	lpf_SetTimeConstant(&(BLDCMotor->LPF_angle), DEF_ANG_FILTER_Tf);
+
+	// maximum angular velocity to be used for positioning
+	BLDCMotor->velocity_limit = DEF_MOT_VEL_LIM;
+	// maximum voltage to be set to the motor
+	BLDCMotor->voltage_limit = DEF_MOT_VOLT_LIM;
+	// not set on the begining
+	BLDCMotor->current_limit = DEF_CURRENT_LIM;
+
+	// index search velocity
+	BLDCMotor->velocity_index_search = DEF_INDEX_SEARCH_TARGET_VELOCITY;
+	// sensor and motor align voltage
+	BLDCMotor->voltage_sensor_align = DEF_VOLTAGE_SENSOR_ALIGN;
 
 	// set zero to PWM
 	BLDCDriver_SetPWM(BLDCMotor->BLDCDriver, 0.0f, 0.0f, 0.0f);
