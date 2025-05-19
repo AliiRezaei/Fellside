@@ -21,8 +21,9 @@
 #include "pid.h"
 #include "lpf.h"
 #include <math.h>
+#include "sensor.h"
 #include "BLDCDriver.h"
 #include "BLDCMotor.h"
-#include "sensor.h"
+
 
 #endif /* INC_MAIN_H_ */

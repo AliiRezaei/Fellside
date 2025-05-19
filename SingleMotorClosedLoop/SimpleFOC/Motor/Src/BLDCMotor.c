@@ -96,60 +96,69 @@ void BLDCMotor_LinkDriver(BLDCMotor_s *BLDCMotor, BLDCDriver_s *BLDCDriver)
 }
 
 /*
+ * @brief : BLDC Motor and Sensor Linker
+ * @param :
+ * 			BLDCMotor --> pointer to BLDCMotor_s  structure, handle motor  params
+ * 			Sensor    --> pointer to Sensor_s structure, handle sensor params
+ */
+void BLDCMotor_LinkSensor(BLDCMotor_s *BLDCMotor, Sensor_s *Sensor)
+{
+	// link sensor
+	BLDCMotor->Sensor = Sensor;
+}
+
+/*
  * @brief : BLDC Motor Run OpenLoop, Caller is BLDCMotor_Move
  * @param :
  * 			BLDCMotor --> pointer to BLDCMotor_s structure, handle motor params
  * 			target    --> target angle in radians
  */
-void BLDCMotor_RunOpenloop(BLDCMotor_s *BLDCMotor, float target)
+void BLDCMotor_RunClosedLoop(BLDCMotor_s *BLDCMotor, float target)
 {
-	// get current time
-	unsigned long now_us = _tim_usec_val_();
+	// update sensor
+	sensor_Update(Sensor);
 
-	// calculate the sample time from last call
-	float Ts = (now_us - BLDCMotor->open_loop_timestamp) * 1e-6f;
+	// electrical angle
+	BLDCMotor->electrical_angle = sensor_GetElecAngle(Sensor,
+			BLDCMotor->zero_electric_angle, BLDCMotor->pole_pairs);
 
-	// quick fix for strange cases (timer overflow or time stamp not defined)
-	if (Ts <= 0 || Ts > 0.5f)
-		Ts = 1e-3f;
+	// angle set point
+	BLDCMotor->shaft_angle = sensor_ShaftAngle(BLDCMotor, Sensor);
+	BLDCMotor->shaft_velocity = sensor_ShaftVelocity(BLDCMotor,
+			Sensor);
+	BLDCMotor->shaft_angle_sp = target;
 
-	// calculate the necessary angle to move from current position towards target angle
-	// with maximal velocity (velocity_limit)
-	if (fabs(target - BLDCMotor->shaft_angle)
-			> fabs(BLDCMotor->velocity_limit * Ts))
-	{
-		BLDCMotor->shaft_angle +=
-				_sign(target - BLDCMotor->shaft_angle)
-						* fabs(BLDCMotor->velocity_limit) * Ts;
-		BLDCMotor->shaft_velocity = BLDCMotor->velocity_limit;
-	}
+	// calculate velocity set point
+	BLDCMotor->shaft_velocity_sp = BLDCMotor->feed_forward_velocity
+			+ pid_Operator(&(BLDCMotor->P_angle),
+					BLDCMotor->shaft_angle_sp - BLDCMotor->shaft_angle);
+	BLDCMotor->shaft_velocity_sp = _constrain(BLDCMotor->shaft_velocity_sp,
+			-BLDCMotor->velocity_limit, BLDCMotor->velocity_limit);
+
+	// calculate the current set point
+	BLDCMotor->current_sp = pid_Operator(&(BLDCMotor->PID_velocity),
+			BLDCMotor->shaft_velocity_sp - BLDCMotor->shaft_velocity);
+
+	// use voltage if phase-resistance not provided
+	if (!_isset(BLDCMotor->phase_resistance))
+		BLDCMotor->voltage.q = BLDCMotor->current_sp;
 	else
-	{
-		BLDCMotor->shaft_angle = target;
-		BLDCMotor->shaft_velocity = 0;
-	}
-
-	// use voltage limit or current limit
-	float Uq = BLDCMotor->voltage_limit;
-	if (_isset(BLDCMotor->phase_resistance))
-	{
-		Uq = _constrain(
-				BLDCMotor->current_limit
-						* BLDCMotor->phase_resistance
-						+ fabs(BLDCMotor->voltage_bemf),
-				-BLDCMotor->voltage_limit,
+		BLDCMotor->voltage.q = _constrain(
+				BLDCMotor->current_sp * BLDCMotor->phase_resistance
+						+ BLDCMotor->voltage_bemf, -BLDCMotor->voltage_limit,
 				BLDCMotor->voltage_limit);
-		// recalculate the current
-		BLDCMotor->current.q = (Uq
-				- fabs(BLDCMotor->voltage_bemf))
-				/ BLDCMotor->phase_resistance;
-	}
-	// set the maximal allowed voltage (voltage_limit) with the necessary angle
-	float elec_angle = BLDCMotor->shaft_angle * BLDCMotor->pole_pairs;
-	BLDCMotor_SetPhaseVoltage(BLDCMotor, Uq, 0, elec_angle);
+	// set d-component (lag compensation if known inductance)
+	if (!_isset(BLDCMotor->phase_inductance))
+		BLDCMotor->voltage.d = 0;
+	else
+		BLDCMotor->voltage.d = _constrain(
+				-BLDCMotor->current_sp * BLDCMotor->shaft_velocity
+						* BLDCMotor->pole_pairs * BLDCMotor->phase_inductance,
+				-BLDCMotor->voltage_limit, BLDCMotor->voltage_limit);
 
-	// save time stamp for next call
-	BLDCMotor->open_loop_timestamp = now_us;
+	// set the phases voltage
+	BLDCMotor_SetPhaseVoltage(BLDCMotor, BLDCMotor->voltage.q,
+			BLDCMotor->voltage.d, BLDCMotor->electrical_angle);
 }
 
 /*

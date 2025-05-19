@@ -32,15 +32,16 @@ typedef struct
 typedef struct
 {
 	// state variables
-	float target;                // current target value - depends of the controller
-	float feed_forward_velocity; // current feed forward velocity
-	float shaft_angle;           // current motor angle
-	float electrical_angle;      // current electrical angle
-	float shaft_velocity;        // current motor velocity
-	float shaft_velocity_sp;     // current target velocity
-	float shaft_angle_sp;        // current target angle
-	DQVoltage_s voltage;         // current d and q voltage set to the motor
-	DQCurrent_s current;         // current d and q current measured
+	float target;                // target value - depends of the controller
+	float feed_forward_velocity; // feed forward velocity
+	float shaft_angle;           // motor angle
+	float electrical_angle;      // electrical angle
+	float shaft_velocity;        // motor velocity
+	float shaft_velocity_sp;     // target velocity
+	float shaft_angle_sp;        // target angle
+	float current_sp;            // current set point
+	DQVoltage_s voltage;         // d and q voltage set to the motor
+	DQCurrent_s current;         // d and q current measured
 	float voltage_bemf;          // estimated backemf voltage (if provided KV constant)
 
 	// motor physical parameters
@@ -66,8 +67,8 @@ typedef struct
 	// driver instance
 	BLDCDriver_s *BLDCDriver;
 
-	// open loop time stamp
-	long open_loop_timestamp;
+	// sensor instance
+	Sensor_s *Sensor;
 
 	// movement direction
 	float direction;
@@ -103,12 +104,20 @@ void BLDCMotor_Init(BLDCMotor_s *BLDCMotor, int _PP,  float _R, float _KV, float
 void BLDCMotor_LinkDriver(BLDCMotor_s *BLDCMotor, BLDCDriver_s *Driver);
 
 /*
- * @brief : BLDC Motor Run OpenLoop, Caller is BLDCMotor_Move
+ * @brief : BLDC Motor and Sensor Linker
+ * @param :
+ * 			BLDCMotor --> pointer to BLDCMotor_s  structure, handle motor  params
+ * 			Sensor    --> pointer to Sensor_s structure, handle sensor params
+ */
+void BLDCMotor_LinkSensor(BLDCMotor_s *BLDCMotor, Sensor_s *Sensor);
+
+/*
+ * @brief : BLDC Motor Run ClosedLoop, Caller is BLDCMotor_Move
  * @param :
  * 			BLDCMotor --> pointer to BLDCMotor_s structure, handle motor params
  * 			target    --> target angle in radians
  */
-void BLDCMotor_RunOpenloop(BLDCMotor_s *BLDCMotor, float target);
+void BLDCMotor_RunClosedLoop(BLDCMotor_s *BLDCMotor, float target);
 
 /*
  * @brief : BLDC Motor Move to Target

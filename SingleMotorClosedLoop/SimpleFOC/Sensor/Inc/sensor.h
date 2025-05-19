@@ -75,11 +75,11 @@ void sensor_Update(Sensor_s *sens);
 /*
  * @brief  : Sensor filtered angle
  * @param  :
- *           FOCMotor --> pointer to FOCMotor_s contains low-pass filter operator
- *           sens     --> pointer to Sensor_s structure
+ *           LPF_angle --> pointer to LowPassFilter_s contains low-pass filter operator
+ *           sens      --> pointer to Sensor_s structure
  * @retval : filtered angle data
 */
-float sensor_ShaftAngle(BLDCMotor_s *BLDCMotor, Sensor_s *sens);
+float sensor_ShaftAngle(LowPassFilter_s *LPF_angle, Sensor_s *sens);
 
 /*
  * @brief  : Sensor normalizing radian angle to [0,2PI]
@@ -92,11 +92,11 @@ __attribute__((weak)) float sensor_NormalizeAngle(float angle);
 /*
  * @brief  : Sensor filtered velocity
  * @param  :
- *           FOCMotor --> pointer to FOCMotor_s contains low-pass filter operator
+ *           LPF_velocity --> pointer to LowPassFilter_s contains low-pass filter operator
  *           sens     --> pointer to Sensor_s structure
  * @retval : filtered velocity data
 */
-float sensor_ShaftVelocity(BLDCMotor_s *BLDCMotor, Sensor_s *sens);
+float sensor_ShaftVelocity(LowPassFilter_s *LPF_velocity, Sensor_s *sens);
 
 /*
  * @brief  : Sensor Get Velocity including full rotations velocity

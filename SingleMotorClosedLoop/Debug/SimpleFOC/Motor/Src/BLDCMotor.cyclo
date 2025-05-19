@@ -1,9 +1,0 @@
-C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:44:29:_sin	4
-C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:68:29:_cos	2
-C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:74:28:_sincos	1
-C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:79:29:_sqrtApprox	1
-../SimpleFOC/Motor/Src/BLDCMotor.c:19:6:BLDCMotor_Init	5
-../SimpleFOC/Motor/Src/BLDCMotor.c:92:6:BLDCMotor_LinkDriver	1
-../SimpleFOC/Motor/Src/BLDCMotor.c:104:6:BLDCMotor_RunOpenloop	9
-../SimpleFOC/Motor/Src/BLDCMotor.c:161:6:BLDCMotor_Move	5
-../SimpleFOC/Motor/Src/BLDCMotor.c:193:6:BLDCMotor_SetPhaseVoltage	3

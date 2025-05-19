@@ -14,9 +14,9 @@ Core/Src/main.o: ../Core/Src/main.c \
  C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h \
  C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/PIDController/Inc/pid.h \
  C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/LowPassFilter/Inc/lpf.h \
+ C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Sensor/Inc/sensor.h \
  C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Driver/Inc/BLDCDriver.h \
- C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Motor/Inc/BLDCMotor.h \
- C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Sensor/Inc/sensor.h
+ C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Motor/Inc/BLDCMotor.h
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/Core/Inc/main.h:
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/Core/Inc/stm32f407xx.h:
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/CMSIS/Include/core_cm4.h:
@@ -32,6 +32,6 @@ C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/Devices/Inc/as5600.h:
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/PIDController/Inc/pid.h:
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/LowPassFilter/Inc/lpf.h:
+C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Sensor/Inc/sensor.h:
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Driver/Inc/BLDCDriver.h:
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Motor/Inc/BLDCMotor.h:
-C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Sensor/Inc/sensor.h:

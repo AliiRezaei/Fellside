@@ -8,7 +8,7 @@ C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:7
 ../SimpleFOC/Sensor/Src/sensor.c:75:7:sensor_GetElecAngle	32	static
 ../SimpleFOC/Sensor/Src/sensor.c:85:7:sensor_GetAngle	16	static
 ../SimpleFOC/Sensor/Src/sensor.c:95:6:sensor_Update	24	static
-../SimpleFOC/Sensor/Src/sensor.c:114:7:sensor_ShaftAngle	32	static
+../SimpleFOC/Sensor/Src/sensor.c:114:7:sensor_ShaftAngle	24	static
 ../SimpleFOC/Sensor/Src/sensor.c:127:29:sensor_NormalizeAngle	24	static
-../SimpleFOC/Sensor/Src/sensor.c:140:7:sensor_ShaftVelocity	32	static
+../SimpleFOC/Sensor/Src/sensor.c:140:7:sensor_ShaftVelocity	24	static
 ../SimpleFOC/Sensor/Src/sensor.c:151:7:sensor_GetVelocity	24	static
