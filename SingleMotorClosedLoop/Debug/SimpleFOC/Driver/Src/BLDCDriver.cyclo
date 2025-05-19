@@ -2,4 +2,6 @@ C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:4
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:68:29:_cos	2
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:74:28:_sincos	1
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:79:29:_sqrtApprox	1
-../Core/Src/main.c:10:5:main	1
+../SimpleFOC/Driver/Src/BLDCDriver.c:15:6:BLDCDriver_Init	1
+../SimpleFOC/Driver/Src/BLDCDriver.c:30:6:BLDCDriver_SetPWM	13
+../SimpleFOC/Driver/Src/BLDCDriver.c:54:6:BLDCDriver_WriteDutyCycle	1

@@ -1,4 +1,4 @@
-Core/Src/main.o: ../Core/Src/main.c \
+SimpleFOC/Motor/Src/BLDCMotor.o: ../SimpleFOC/Motor/Src/BLDCMotor.c \
  C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/Core/Inc/main.h \
  C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/Core/Inc/stm32f407xx.h \
  C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/CMSIS/Include/core_cm4.h \

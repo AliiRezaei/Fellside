@@ -2,4 +2,7 @@ C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:4
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:68:29:_cos	2
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:74:28:_sincos	1
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:79:29:_sqrtApprox	1
-../Core/Src/main.c:10:5:main	1
+../SimpleFOC/LowPassFilter/Src/lpf.c:13:6:lpf_Init	1
+../SimpleFOC/LowPassFilter/Src/lpf.c:22:6:lpf_SetTimeConstant	1
+../SimpleFOC/LowPassFilter/Src/lpf.c:30:7:lpf_Operator	3
+../SimpleFOC/LowPassFilter/Src/lpf.c:53:6:lpf_Reset	1

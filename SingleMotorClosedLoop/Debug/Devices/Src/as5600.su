@@ -2,4 +2,6 @@ C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:4
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:68:29:_cos	24	static
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:74:28:_sincos	24	static
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:79:29:_sqrtApprox	24	static
-../Core/Src/main.c:10:5:main	48	static
+../Devices/Src/as5600.c:13:6:as5600_Status	16	static
+../Devices/Src/as5600.c:35:10:as5600_ReadRawAngle	16	static
+../Devices/Src/as5600.c:52:10:as5600_ReadAngle	16	static

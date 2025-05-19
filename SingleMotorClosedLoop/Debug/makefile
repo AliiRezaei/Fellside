@@ -10,6 +10,13 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include Startup/subdir.mk
+-include SimpleFOC/Sensor/Src/subdir.mk
+-include SimpleFOC/PIDController/Src/subdir.mk
+-include SimpleFOC/Motor/Src/subdir.mk
+-include SimpleFOC/LowPassFilter/Src/subdir.mk
+-include SimpleFOC/Driver/Src/subdir.mk
+-include Peripherals/Src/subdir.mk
+-include Devices/Src/subdir.mk
 -include Core/Src/subdir.mk
 -include objects.mk
 

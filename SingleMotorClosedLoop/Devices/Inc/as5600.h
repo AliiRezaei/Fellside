@@ -24,20 +24,21 @@
 #define AS5600_STATUS_MD_Pos     (5U)
 #define AS5600_STATUS_MD         (1U << AS5600_STATUS_MD_Pos)
 
-#define AS5600_PRECISE 0.087890625f
 
 /*
- * @brief as5600 status check
+ * @brief : as5600 status check
  */
 void as5600_Status(void);
 
 /*
- * @brief as5600 read raw angle resister
+ * @brief  : as5600 read raw angle resister
+ * @retval : raw angle register data
  */
 uint16_t as5600_ReadRawAngle(void);
 
 /*
- * @brief as5600 read angle resister
+ * @brief  : as5600 read angle resister
+ * @retval : angle register data
  */
 uint16_t as5600_ReadAngle(void);
 

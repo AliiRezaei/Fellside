@@ -2,4 +2,7 @@ C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:4
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:68:29:_cos	2
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:74:28:_sincos	1
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:79:29:_sqrtApprox	1
-../Core/Src/main.c:10:5:main	1
+../SimpleFOC/PIDController/Src/pid.c:15:6:pid_Init	1
+../SimpleFOC/PIDController/Src/pid.c:26:6:pid_SetGains	1
+../SimpleFOC/PIDController/Src/pid.c:42:7:pid_Operator	10
+../SimpleFOC/PIDController/Src/pid.c:95:6:pid_Reset	1

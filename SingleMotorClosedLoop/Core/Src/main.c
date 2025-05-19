@@ -24,7 +24,17 @@ int main(void)
 	// i2c magnetic sensor configuration
 	i2c_I2C1_Config();
 
+	// let test as5600
+	// as5600 sensor instance
+	Sensor_s sensor;
 
-	while(1) {;}
+	// init sensor
+	sensor_Init(&sensor);
+
+	while(1)
+	{
+		sensor_Update(&sensor);
+		tim_TIM2_Delay_ms(100);
+	}
 }
 

@@ -2,4 +2,6 @@ C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:4
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:68:29:_cos	24	static
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:74:28:_sincos	24	static
 C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:79:29:_sqrtApprox	24	static
-../Core/Src/main.c:10:5:main	48	static
+../Peripherals/Src/i2c.c:14:6:i2c_I2C1_Config	4	static
+../Peripherals/Src/i2c.c:47:6:i2c_I2C1_Write	16	static
+../Peripherals/Src/i2c.c:72:9:i2c_I2C1_Read	24	static

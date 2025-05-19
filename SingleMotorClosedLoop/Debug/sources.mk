@@ -23,5 +23,12 @@ C_DEPS :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 Core/Src \
+Devices/Src \
+Peripherals/Src \
+SimpleFOC/Driver/Src \
+SimpleFOC/LowPassFilter/Src \
+SimpleFOC/Motor/Src \
+SimpleFOC/PIDController/Src \
+SimpleFOC/Sensor/Src \
 Startup \
 

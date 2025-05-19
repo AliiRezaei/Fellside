@@ -1,0 +1,14 @@
+C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:44:29:_sin	32	static
+C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:68:29:_cos	24	static
+C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:74:28:_sincos	24	static
+C:/Users/Asus/armcortex/Fellside/SingleMotorClosedLoop/SimpleFOC/Utils/utils.h:79:29:_sqrtApprox	24	static
+../SimpleFOC/Sensor/Src/sensor.c:15:6:sensor_Init	16	static
+../SimpleFOC/Sensor/Src/sensor.c:50:7:sensor_GetSensorAngle	16	static
+../SimpleFOC/Sensor/Src/sensor.c:63:7:sensor_GetMechAngle	16	static
+../SimpleFOC/Sensor/Src/sensor.c:75:7:sensor_GetElecAngle	32	static
+../SimpleFOC/Sensor/Src/sensor.c:85:7:sensor_GetAngle	16	static
+../SimpleFOC/Sensor/Src/sensor.c:95:6:sensor_Update	24	static
+../SimpleFOC/Sensor/Src/sensor.c:114:7:sensor_ShaftAngle	32	static
+../SimpleFOC/Sensor/Src/sensor.c:127:29:sensor_NormalizeAngle	24	static
+../SimpleFOC/Sensor/Src/sensor.c:140:7:sensor_ShaftVelocity	32	static
+../SimpleFOC/Sensor/Src/sensor.c:151:7:sensor_GetVelocity	24	static

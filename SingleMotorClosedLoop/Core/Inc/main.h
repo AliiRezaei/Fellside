@@ -12,13 +12,17 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdint.h>
-#include <math.h>
 #include "rcc.h"
 #include "tim.h"
 #include "i2c.h"
-//#include "utils.h"
-//#include "BLDCDriver.h"
-//#include "BLDCMotor.h"
-
+#include "as5600.h"
+#include <string.h>
+#include "utils.h"
+#include "pid.h"
+#include "lpf.h"
+#include <math.h>
+#include "BLDCDriver.h"
+#include "BLDCMotor.h"
+#include "sensor.h"
 
 #endif /* INC_MAIN_H_ */
