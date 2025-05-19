@@ -10,6 +10,7 @@
 
 /*
  * @brief : I2C1 configuration for communicating with as5600
+ * @note  : PB6 --> SCL, PB7 --> SDA
  */
 void i2c_I2C1_Config(void);
 
