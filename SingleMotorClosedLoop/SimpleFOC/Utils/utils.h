@@ -15,6 +15,20 @@
 #define DEF_MOT_CURR_LIM 2                  // default current limit
 #define DEF_MOT_VEL_LIM  5                  // default velocity limit
 
+// velocity PID controller params
+#define DEF_PID_VEL_P 0.5f                  // default PID controller P value
+#define DEF_PID_VEL_I 10.0f                 // default PID controller I value
+#define DEF_PID_VEL_D 0.0f                  // default PID controller D value
+#define DEF_PID_VEL_RAMP 1000.0f            // default PID controller voltage ramp value
+#define DEF_PID_VEL_LIM (DEF_POWER_SUPPLY)  // default PID controller voltage limit
+
+// angle PID controller params
+#define DEF_PID_ANG_P 20.0f                 // default angle PID controller P value
+#define DEF_PID_ANG_I 0.0f                  // default angle PID controller I value
+#define DEF_PID_ANG_D 0.0f                  // default angle PID controller D value
+#define DEF_PID_ANG_RAMP 0.0f               // default angle PID controller voltage ramp value
+#define DEF_PID_ANG_LIM 20.0f               // angle velocity limit default
+
 // utility defines
 #define _2_SQRT3 1.15470053838f
 #define _SQRT3 1.73205080757f
