@@ -116,19 +116,19 @@ void BLDCMotor_LinkSensor(BLDCMotor_s *BLDCMotor, Sensor_s *Sensor)
 void BLDCMotor_RunClosedLoop(BLDCMotor_s *BLDCMotor, float target)
 {
 	// update sensor
-	sensor_Update(Sensor);
+	sensor_Update(BLDCMotor->Sensor);
 
 	// electrical angle
-	BLDCMotor->electrical_angle = sensor_GetElecAngle(Sensor,
+	BLDCMotor->electrical_angle = sensor_GetElecAngle(BLDCMotor->Sensor,
 			BLDCMotor->zero_electric_angle, BLDCMotor->pole_pairs);
 
 	// angle set point
-	BLDCMotor->shaft_angle = sensor_ShaftAngle(BLDCMotor, Sensor);
-	BLDCMotor->shaft_velocity = sensor_ShaftVelocity(BLDCMotor,
-			Sensor);
+	BLDCMotor->shaft_angle = sensor_ShaftAngle(&(BLDCMotor->LPF_angle), BLDCMotor->Sensor);
 	BLDCMotor->shaft_angle_sp = target;
 
 	// calculate velocity set point
+	BLDCMotor->shaft_velocity = sensor_ShaftVelocity(&(BLDCMotor->LPF_velocity),
+			BLDCMotor->Sensor);
 	BLDCMotor->shaft_velocity_sp = BLDCMotor->feed_forward_velocity
 			+ pid_Operator(&(BLDCMotor->P_angle),
 					BLDCMotor->shaft_angle_sp - BLDCMotor->shaft_angle);
@@ -188,7 +188,7 @@ void BLDCMotor_Move(BLDCMotor_s *BLDCMotor, float target)
 
 	// set target
 	BLDCMotor->shaft_angle_sp = BLDCMotor->target;
-	BLDCMotor_RunOpenloop(BLDCMotor, BLDCMotor->shaft_angle_sp);
+	BLDCMotor_RunClosedLoop(BLDCMotor, BLDCMotor->shaft_angle_sp);
 }
 
 /*
